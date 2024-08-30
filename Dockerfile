@@ -9,7 +9,7 @@ RUN echo "GUARDIAN_ENV is set to ${GUARDIAN_ENV}"
 ENTRYPOINT ["/guardiand"]
 
 # Set the CMD to use the environment variable for --env
-CMD ["spy", "--nodeKey", "/node.key", "--spyRPC", "[::]:7073", "--env", "${GUARDIAN_ENV}"]
+CMD ["spy", "--nodeKey", "/node.key", "--spyRPC", "[::]:7073", "--env", "mainnet"]
 
 # Expose the port
 EXPOSE 7073
