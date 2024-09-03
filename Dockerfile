@@ -10,6 +10,8 @@ ENV BOOTSTRAP_NODES='/dns4/wormhole-v2-mainnet-bootstrap.xlabs.xyz/udp/8999/quic
 # Expose the port that the service will run on
 EXPOSE 7073
 
-# Use CMD with shell expansion to run the guardiand command with arguments
-CMD guardiand spy --nodeKey $NODE_KEY_PATH --spyRPC $SPY_RPC --network $NETWORK_PATH --bootstrap $BOOTSTRAP_NODES
+ENTRYPOINT ["/guardiand"]
+
+# Directly pass the arguments to guardiand
+CMD [ "spy", "--nodeKey", "/node.key", "--spyRPC", "[::]:7073", "--network", "/wormhole/mainnet/2", "--bootstrap", "/dns4/wormhole-v2-mainnet-bootstrap.xlabs.xyz/udp/8999/quic/p2p/12D3KooWNQ9tVrcb64tw6bNs2CaNrUGPM7yRrKvBBheQ5yCyPHKC,/dns4/wormhole.mcf.rocks/udp/8999/quic/p2p/12D3KooWDZVv7BhZ8yFLkarNdaSWaB43D6UbQwExJ8nnGAEmfHcU,/dns4/wormhole-v2-mainnet-bootstrap.staking.fund/udp/8999/quic/p2p/12D3KooWG8obDX9DNi1KUwZNu9xkGwfKqTp2GFwuuHpWZ3nQruS1" ]
 
