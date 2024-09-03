@@ -1,10 +1,6 @@
 # Use the specified image from the GitHub Container Registry
 FROM ghcr.io/wormhole-foundation/guardiand:latest
 
-# Set the platform to linux/amd64
-ARG TARGETPLATFORM=linux/amd64
-# Docker will automatically set this based on the platform it's running on
-
 # Set up the necessary environment variables
 ENV NODE_KEY_PATH=/node.key
 ENV SPY_RPC="[::]:7073"
@@ -17,6 +13,6 @@ EXPOSE 7073
 # Set the entrypoint to the guardiand binary
 ENTRYPOINT ["/guardiand"]
 
-# Set the default command to the spy mode with the necessary arguments
-CMD ["spy", "--nodeKey", "$NODE_KEY_PATH", "--spyRPC", "$SPY_RPC", "--network", "$NETWORK_PATH", "--bootstrap", "$BOOTSTRAP_NODES"]
+# Use a shell form for CMD to ensure environment variables are expanded
+CMD sh -c "spy --nodeKey $NODE_KEY_PATH --spyRPC $SPY_RPC --network $NETWORK_PATH --bootstrap $BOOTSTRAP_NODES"
 
