@@ -10,9 +10,6 @@ ENV BOOTSTRAP_NODES='/dns4/wormhole-v2-mainnet-bootstrap.xlabs.xyz/udp/8999/quic
 # Expose the port that the service will run on
 EXPOSE 7073
 
-# Set the entrypoint to the guardiand binary
-ENTRYPOINT ["/guardiand"]
-
-# Use a shell form for CMD to ensure environment variables are expanded
-CMD sh -c "spy --nodeKey $NODE_KEY_PATH --spyRPC $SPY_RPC --network $NETWORK_PATH --bootstrap $BOOTSTRAP_NODES"
+# Use CMD with shell expansion to run the guardiand command with arguments
+CMD guardiand spy --nodeKey $NODE_KEY_PATH --spyRPC $SPY_RPC --network $NETWORK_PATH --bootstrap $BOOTSTRAP_NODES
 
